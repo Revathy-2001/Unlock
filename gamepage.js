@@ -12,43 +12,31 @@ let drawrectangle = (x,y,w,h) => {
     ctx.stroke();
 }                                              // function to draw rectangle with canvas.
 var gotkey = false,lockopened= false;          // boolean to check whether the keys are took and the lock opened?
-
 var controller = {
-
     left:false,
     right:false,
-    up:false,
     keyListener:function(event) {
-  
       var key_state = (event.type == "keydown")?true:false;
-  
       switch(event.keyCode) {
-  
         case 37:// left key
           controller.left = key_state;
-        break;
-        case 38:// up key
-          controller.up = key_state;
         break;
         case 39:// right key
           controller.right = key_state;
         break;
-  
       }
     }
-};                                               // function to check which key is pressed.
-  
+};  // function to check which key is pressed. 
 var xBall = 40,yBall =  10,radius = 30,gravity = 3 ,x_velocity=0,y_velocity=0;   // Ball details
 var xpaddle = 550, ypaddle = 0,  paddleWidth = 100, paddleHeight = 160,xpaddleSpeed = 1;ypaddleSpeed = 1;  // centre paddledetails
 var xbarrier1 = 800, ybarrier1 = 0,barrier1Width = 80,barrier1Height = 70, b1XSpeed = 1,b1YSpeed = 1;      // right floor 1st barrier details
 var xbarrier2 = 1000, ybarrier2 = 260,barrier2Width = 80,barrier2Height = 70, b2XSpeed = 1,b2YSpeed = 1;   // right floor 2nd barrier details
-var leftbarrier_x = 300,leftbarrier_y = 390, leftbarrierWidth = 80,leftbarrierHeight = 70,xSpeed = 1,ySpeed = 1;
-function animate(){
-  
-    ctx.clearRect(0,0,innerWidth,innerHeight);
+var leftbarrier_x = 300,leftbarrier_y = 390, leftbarrierWidth = 80,leftbarrierHeight = 70,xSpeed = 1,ySpeed = 1;//Left barrier details
+function animate(){     // function to call for every movement.
+    ctx.clearRect(0,0,innerWidth,innerHeight); 
     ctx.beginPath();
     ctx.fillStyle = "#FF8C00";
-    drawrectangle(xpaddle,ypaddle,paddleWidth,paddleHeight);
+    drawrectangle(xpaddle,ypaddle,paddleWidth,paddleHeight);  //function called for drawing a centre paddle.
     if((ypaddle + ypaddleSpeed) > 300 ||( ypaddle + ypaddleSpeed) < -20)
         ypaddleSpeed = -ypaddleSpeed;                                   // centre paddle movement
     if((ybarrier1 + b1YSpeed) >= 260 || (ybarrier1 + b1YSpeed) <= -20)
@@ -56,8 +44,8 @@ function animate(){
     if((ybarrier2 + b2YSpeed) >= 260 || (ybarrier2 + b2YSpeed) <= -20)
         b2YSpeed = -b2YSpeed;                                          // right floor second barrier movement
     if((leftbarrier_y + ySpeed) >= 390 || (leftbarrier_y + ySpeed) <= 200)
-        ySpeed = -ySpeed; 
-    if((xBall+radius >= 800 && xBall+radius <= 940 && ybarrier1>= 200 && ybarrier1 <= 250))
+        ySpeed = -ySpeed;                                             // Left barrier movement
+    if((xBall+radius >= 800 && xBall+radius <= 940 && ybarrier1>= 200 && ybarrier1 <= 250))  //If the ball hits the right first barrier.
     {
         $("#lose").modal('show');
         document.getElementById('loseclose').addEventListener("click",function() {
@@ -66,7 +54,7 @@ function animate(){
         clearInterval(interval);
         mySound.play();
     }
-    if(xBall+radius >= 1000 && xBall+radius <= 1140 && ybarrier2 >= 200 && ybarrier2 <= 250)
+    if(xBall+radius >= 1000 && xBall+radius <= 1140 && ybarrier2 >= 200 && ybarrier2 <= 250) // If the ball hits the right second barrier.
     {
      
         $("#lose").modal('show');
@@ -76,7 +64,7 @@ function animate(){
         clearInterval(interval);
         mySound.play();
     }
-    if((xBall+radius >= 290 && xBall+radius <= 440 && leftbarrier_y >= 320 && leftbarrier_y <= 390 && yBall >= 310))
+    if((xBall+radius >= 290 && xBall+radius <= 440 && leftbarrier_y >= 320 && leftbarrier_y <= 390 && yBall >= 310))// If the ball hits the left barrier.
     {
         $("#lose").modal('show'); 
         document.getElementById('loseclose').addEventListener("click",function() {
@@ -88,7 +76,7 @@ function animate(){
     leftbarrier_y += ySpeed;
     ybarrier2 += b2YSpeed;
     ybarrier1 += b1YSpeed;
-    ypaddle += ypaddleSpeed;     
+    ypaddle += ypaddleSpeed;             
 
     drawrectangle(0,200,500,10);   //left 1st floor
     drawrectangle(700,330,600,10); //right 1st floor
@@ -149,8 +137,7 @@ function animate(){
         document.getElementById('wonclose').addEventListener("click",function() {
           window.location.replace("index.html")
         });                                   
-        clearInterval(interval);
-                                   //Return to homepage after clicking the close button.
+        clearInterval(interval);   //Return to homepage after clicking the close button.
         document.getElementById('stopplaying').addEventListener("click",function() {
           window.location.replace("index.html")
         });                                   
@@ -159,8 +146,8 @@ function animate(){
       
     }
 
-    if(xBall <= 100 && !lockopened && yBall >= 410) {
-      $("#singlestar").modal('show');  
+    if(xBall <= 100 && !lockopened && yBall >= 410) {  //single star displayed when user reaches end without the key
+      $("#singlestar").modal('show');                 
       document.getElementById('singlestarclose').addEventListener("click",function() {
         window.location.replace("index.html")
       }); 
@@ -168,8 +155,8 @@ function animate(){
       keysound.play();
     }
     
-    if(yBall + radius >= innerHeight) {
-      $("#lose").modal('show');                                       // Displaying the Modal before winning(ball reaches the ground).
+    if(yBall + radius >= innerHeight) { // Displaying the Modal before winning(ball reaches the ground).
+      $("#lose").modal('show');                                      
       document.getElementById('loseclose').addEventListener("click",function() {
         window.location.replace("index.html")
       });
@@ -186,11 +173,11 @@ function animate(){
     ctx.stroke();
 }
  
-window.addEventListener("keydown", controller.keyListener)
+window.addEventListener("keydown", controller.keyListener); 
 window.addEventListener("keyup", controller.keyListener);
-let interval = setInterval(animate, 10);
+let interval = setInterval(animate, 10);   //calling the animate function.
 
-function sound(src) {
+function sound(src) {                   //sound function when Game overs
   this.sound = document.createElement("audio");
   this.sound.src = src;
   this.sound.setAttribute("preload", "auto");
