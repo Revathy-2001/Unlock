@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>WD101</title>
+    <style>
+        body{  /*Styling background*/
+            margin: 0;
+            overflow: hidden;
+            background: url('Images/gamebg.png');
+            background-repeat: no-repeat;                
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        .fire{  /*Styling fire at the bottom of the page*/
+            position: absolute;
+            top: 325px;
+        }
+        .bonus{  /*Styling the Key*/
+            width: 150px;
+            position: relative;
+            top:-400px;
+            left: 1100px;
+        }
+        .lock{ /*Styling the lock*/
+            position: relative;
+            top:-290px;
+            left: -150px;
+        }
+        #won{  /*Modal box after won*/
+            margin-top: 150px;
+        }
+        .modal-header{  /*Styling header of modal box*/
+            text-align: center;
+            font-weight: 700;
+            font: 1.2rem sans-serif;
+            margin-left: 180px;
+        }
+        
+        .modal-body p{  /*Styling body of modal box*/
+            text-align: center;
+            font-weight: 700;
+            font: 1.2rem sans-serif;
+        }
+        .modal-body button{  /*Styling body of modal button*/
+            float: right;
+         }
+    </style>
+</head>
+<body>
+    <canvas></canvas>
+    <img src="Images/key.gif" class="bonus" id = "key">            <!-- Key gif-->
+    <img src="Images/lock.png" id = "lock" width="80px" class="lock">   <!-- Lock image-->
+    <img src="Images/fire.gif" class="fire" style="position:absolute;left:-150px;" >  <!-- Fire gif-->
+    <img src="Images/fire.gif" class="fire" style="position:absolute;left:10px;" >
+    <img src="Images/fire.gif" class="fire" style="position:absolute;left:150px;" >
+    <img src="Images/fire.gif" class="fire" style="position:absolute;left:300px;" >
+    <img src="Images/fire.gif" class="fire" style="position:absolute;left:450px;" >
+    <img src="Images/fire.gif" class="fire" style="position:absolute;left:600px;" >
+    <img src="Images/fire.gif" class="fire" style="position:absolute;left:750px;" >
+    <img src="Images/fire.gif" class="fire" style="position:absolute;left:900px;" >
+    <span id="score" class="score"></span>
+    <script src="gamepage.js" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>   <!-- Linking Javascript-->
+
+    <div id="won" class="modal fade">      <!-- Modal box after won-->
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span><img src = "Images/won.jpg" width="40px"></span>
+                    <span><img src = "Images/won.jpg" width="40px"></span>
+                    <span><img src = "Images/won.jpg" width="40px"></span>
+                    <button type="button" id = "wonclose" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>You have been successfully unlocked!</p>
+                    <button type="submit"  id = "stopplaying" class="btn btn-primary">Stop Playing</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+ 
+    <div id="lose" class="modal fade">    <!-- Modal box after lose-->
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span><img src = "Images/lose.png" width="40px"></span>
+                    <span><img src = "Images/lose.png" width="40px"></span>
+                    <span><img src = "Images/lose.png" width="40px"></span>
+                    <button type="button" class="close" id = "loseclose" data-dismiss="modal">&times;</button> 
+                </div>
+                <div class="modal-body">
+                    <p>You Lost! <a href = "#" onclick="window.location.reload(true)">Try again</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="singlestar" class="modal fade">   <!-- Modal box after single star-->
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span><img src = "Images/won.jpg" width="40px"></span>
+                    <span><img src = "Images/lose.png" width="40px"></span>
+                    <span><img src = "Images/lose.png" width="40px"></span>
+                    <button type="button" class="close" id = "singlestarclose" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>You Lost! Lock cannot open without key! <a href = "#" onclick="window.location.reload(true)">Try again</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
